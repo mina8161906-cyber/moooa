@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - حكايتنا ❤️</title>
+    <!-- استدعاء خط Cairo من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ff1744;
+            --primary-pink: #d6336c;
+            --soft-pink: #fff0f5;
+            --text-color: #5c1d38;
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #ffe6eb 0%, #fff0f5 50%, #ffd1dc 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية القلوب المتطايرة */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(255, 23, 68, 0.2);
+            font-size: 24px;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* حاوي بطاقة الدخول */
+        .login-card {
+            position: relative;
+            z-index: 1;
+            max-width: 420px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(214, 51, 108, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .heart-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .title {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--primary-pink);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #7b2948;
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 50px;
+            border: 2px solid #ffb6c1;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            color: var(--text-color);
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 12px rgba(214, 51, 108, 0.25);
+            background: #ffffff;
+        }
+
+        .error-msg {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(45deg, var(--primary-pink), var(--primary));
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 23, 68, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+        }
+
+        @media (max-width: 480px) {
+            .login-card { padding: 30px 20px; }
+            .title { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- خلفية القلوب -->
+    <div class="hearts-bg" id="heartsContainer"></div>
+
+    <main class="login-card">
+        <div class="heart-icon">🔐❤️</div>
+        <h1 class="title">مرحباً بك</h1>
+        <p class="subtitle">أدخل كلمة المرور لدخول عالمنا الخاص ✨</p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور هنا..." required autocomplete="off">
+            </div>
+
+            <div class="error-msg" id="errorMsg">❌ كلمة المرور غير صحيحة، حاول مرة أخرى!</div>
+
+            <button type="submit" class="btn-submit">دخول ❤️</button>
+        </form>
+    </main>
+
+    <script>
+        // كلمة المرور الصحيحة (يمكنك تغييرها هنا)
+        const CORRECT_PASSWORD = "بحبك";
+
+        // تأثير القلوب الممتدة في الخلفية
+        const heartsBg = document.getElementById('heartsContainer');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsBg.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 600);
+
+        // التحقق من كلمة المرور عند التقديم
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const passwordInput = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (passwordInput === CORRECT_PASSWORD) {
+                errorMsg.style.display = 'none';
+                
+                // إطلاق مجموعة قلوب للتعبير عن النجاح
+                for(let i = 0; i < 25; i++) {
+                    setTimeout(createHeart, i * 60);
+                }
+
+                // التوجيه إلى الصفحة الرئيسية بعد نصف ثانية
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 600);
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
+</body>
+</html>

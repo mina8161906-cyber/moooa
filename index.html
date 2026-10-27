@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حكايتنا ❤️</title>
+    <!-- استدعاء خطوط عربية جميلة من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ff1744;
+            --primary-pink: #d6336c;
+            --soft-pink: #fff0f5;
+            --text-color: #5c1d38;
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #ffe6eb 0%, #fff0f5 50%, #ffd1dc 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية القلوب المتطايرة */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(255, 23, 68, 0.2);
+            font-size: 24px;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* حاوي المحتوى الرئيسي */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(214, 51, 108, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 40px 25px;
+            text-align: center;
+        }
+
+        /* العناوين */
+        .subtitle-top {
+            color: var(--primary-pink);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .main-title {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 23, 68, 0.15);
+        }
+
+        .subtitle-sub {
+            color: #e75480;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .intro-p {
+            font-size: 1.15rem;
+            color: #7b2948;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ffb6c1, transparent);
+            margin: 35px 0;
+        }
+
+        .section-title {
+            color: var(--primary-pink);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .letter-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .love-declaration {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 25px 0 10px;
+        }
+
+        /* قسم الذكريات والصور */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .memory-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5deg);
+            box-shadow: 0 12px 25px rgba(214, 51, 108, 0.2);
+        }
+
+        .memory-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .memory-card p {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #7b2948;
+        }
+
+        /* اقتباس الكلام من القلب */
+        blockquote {
+            font-family: 'Amiri', serif;
+            font-size: 1.35rem;
+            color: #9c2757;
+            background: #fff5f8;
+            border-right: 4px solid var(--primary-pink);
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.9;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        /* مشغل الصوت */
+        audio {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 15px;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        /* زر الإرسال أو التفاعل */
+        .btn-love {
+            background: linear-gradient(45deg, var(--primary-pink), var(--primary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 23, 68, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-love:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 2rem; }
+            .subtitle-sub { font-size: 1.1rem; }
+            .container { padding: 25px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- خلفية القلوب -->
+    <div class="hearts-bg" id="heartsContainer"></div>
+
+    <main class="container">
+        <!-- المقدمة -->
+        <header>
+            <div class="subtitle-top">إلى الشخص المميز في حياتي</div>
+            <h1 class="main-title">❤️ حكايتنا الحلوة ❤️</h1>
+            <h2 class="subtitle-sub">وسط ملايين الناس، قلبي اختارك أنت 💗</h2>
+            <p class="intro-p">
+                وجودك في حياتي بيخلي الأيام أجمل،<br>
+                وضحكتك بتخليني أنسى أي حاجة وحشة.<br>
+                أنت شخص مميز جدًا عندي.
+            </p>
+        </header>
+
+        <hr class="divider">
+
+        <!-- رسالة من القلب -->
+        <section class="letter-content">
+            <h2 class="section-title">💌 رسالة من قلبي</h2>
+            <p style="color: #9c2757; font-weight: 700; font-size: 1.2rem;">إلى أغلى إنسان في حياتي ❤️</p>
+            <p>مش عارف أبدأ كلامي إزاي، بس عارف إن وجودك في حياتي حاجة غالية جدًا.</p>
+            <p>بحب تفاصيلك الصغيرة، وضحكتك، وكل لحظة بتخليني أبتسم من غير ما أحس.</p>
+            <p>بتمنى أشوفك دايمًا مبسوط، وأكون سبب في ابتسامة حلوة على وشك.</p>
+            <div class="love-declaration">بحبك قد كل القلوب اللي في الدنيا ❤️</div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- الذكريات -->
+        <section>
+            <h2 class="section-title">📸 ذكرياتنا</h2>
+            <p style="margin-bottom: 15px;">كل صورة بتحكي حكاية جميلة 💕</p>
+            
+            <div class="gallery">
+                <div class="memory-card">
+                    <img src="WhatsApp Image 2026-10-27 at 3.44.20 PM (1).jpeg" alt="أول ذكرى">
+                    <p>أول ذكرى حلوة ❤️</p>
+                </div>
+
+                <div class="memory-card">
+                    <img src="WhatsApp Image 2026-10-27 at 3.44.20 PM (2).jpeg" alt="لحظة مميزة">
+                    <p>لحظة مش هنساها 🌷</p>
+                </div>
+
+                <div class="memory-card">
+                    <img src="WhatsApp Image 2026-10-27 at 3.44.20 PM.jpeg" alt="ذكريات جميلة">
+                    <p>وأجمل لسه جاي 💖</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- كلام من القلب -->
+        <section>
+            <h2 class="section-title">💗 كلام من القلب</h2>
+            <blockquote>
+                لو كان بإيدي أختار أجمل حاجة في الدنيا، كنت هختارك أنت كل مرة.
+                <br><br>
+                أنت مش مجرد شخص في حياتي، أنت ذكرى حلوة بتتجدد كل يوم. ❤️
+            </blockquote>
+        </section>
+
+        <hr class="divider">
+
+        <!-- المشغل الصوتي -->
+        <section>
+            <h2 class="section-title">🎵 أغنيتنا</h2>
+            <p>اسمع الأغنية اللي بتفكرك بيا ❤️</p>
+            <audio controls>
+                <source src="WhatsApp Audio 2026-10-27 at 12.27.10 PM.mpeg" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+        </section>
+
+        <hr class="divider">
+
+        <!-- الخاتمة -->
+        <footer>
+            <h2 class="main-title" style="font-size: 2.2rem;">❤️ بحبك ❤️</h2>
+            <p class="intro-p" style="margin-bottom: 10px;">
+                الموقع ده معمول مخصوص علشانك، لأنك تستحق كل حاجة جميلة في الدنيا.
+            </p>
+            <p style="color: var(--primary-pink); font-weight: 700; font-size: 1.2rem;">
+                مع كل الحب 💕
+            </p>
+            <button class="btn-love" onclick="createBurstOfHearts()">اضغط هنا لحب أكتر 💖</button>
+        </footer>
+    </main>
+
+    <!-- نص برمجي لإضافة تأثير القلوب -->
+    <script>
+        // إنشاء القلوب الممتدة في الخلفية تلقائياً
+        const container = id => document.getElementById(id);
+        const heartsBg = container('heartsContainer');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsBg.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 600);
+
+        // انطلاق القلوب عند الضغط على الزر
+        function createBurstOfHearts() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
